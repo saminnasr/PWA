@@ -4,8 +4,8 @@ const urlsToCache = [
     '/index.html',
     '/styles.css',
     '/script.js',
-    '/images/icons/icon_large.png',
-    '/images/icons/icon.png',
+    'icon_large.png',
+    'icon.png',
     // اضافه کردن مسیرهای فایل‌های دیگری که باید کش شوند
 ];
 
