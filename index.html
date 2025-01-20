@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0078d7">
-    <link rel="manifest" href="/manifest.json">
-
 
     <!-- Esri Leaflet Geocoder -->
     <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.4.1/dist/esri-leaflet-geocoder.css" />
     <script src="https://unpkg.com/esri-leaflet-geocoder@2.4.1/dist/esri-leaflet-geocoder.js"></script>
 
+    <link rel="manifest" href="/manifest.json">
 
 
 
@@ -103,24 +102,6 @@
     <h1> جهت مسیریابی از دکمه زیر استفاده نمایید. </h1>
     <button onclick="location.href='routing.html'">شروع مسیریابی</button>
 
-
-
-
-    <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then((registration) => {
-        console.log('Service Worker registered with scope:', registration.scope);
-      })
-      .catch((error) => {
-        console.error('Service Worker registration failed:', error);
-      });
-  }
-</script>
-
-
-
-    
 
 </body>
 

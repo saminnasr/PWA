@@ -1,15 +1,3 @@
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then((registration) => {
-                console.log('Service Worker registered with scope:', registration.scope);
-            })
-            .catch((error) => {
-                console.log('Service Worker registration failed:', error);
-            });
-    });
-}
-
 
 
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
@@ -244,11 +232,12 @@ document.getElementById('filter-button').addEventListener('click', () => {
 });
 
 
+
+
 let deferredPrompt;
 
-// هنگام رویداد 'beforeinstallprompt'، اپلیکیشن آماده نصب می‌شود
 window.addEventListener('beforeinstallprompt', (e) => {
-    // جلوگیری از نمایش پیش‌فرض
+    // جلوگیری از نمایش پیش‌فرض نصب
     e.preventDefault();
     deferredPrompt = e;
 
@@ -256,7 +245,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     const installButton = document.getElementById('install-btn');
     installButton.style.display = 'block';
 
-    // هنگامی که کاربر روی دکمه نصب کلیک کند
+    // زمانی که کاربر روی دکمه نصب کلیک می‌کند
     installButton.addEventListener('click', () => {
         // نمایش دیالوگ نصب
         deferredPrompt.prompt();
@@ -272,12 +261,5 @@ window.addEventListener('beforeinstallprompt', (e) => {
         });
     });
 });
-
-
-
-
-
-
-
 
 
