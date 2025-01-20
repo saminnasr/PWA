@@ -1,0 +1,11 @@
+dist
+*.md
+node_modules
+
+# is actually output
+packages/turf/turf.min.js
+packages/turf/test.example.js
+
+pnpm-lock.yaml
+
+/.nx/cache

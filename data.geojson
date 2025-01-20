@@ -1,0 +1,16 @@
+
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [51.3890, 35.6892] },
+            "properties": { "name": "تهران", "description": "پایتخت ایران" }
+        },
+        {
+            "type": "Feature",
+            "geometry": { "type": "Point", "coordinates": [48.6690, 31.3200] },
+            "properties": { "name": "اهواز", "description": "مرکز استان خوزستان" }
+        }
+    ]
+}

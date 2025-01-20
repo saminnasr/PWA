@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA GIS</title>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet-search/dist/leaflet-search.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0078d7">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Esri Leaflet Geocoder -->
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.4.1/dist/esri-leaflet-geocoder.css" />
+    <script src="https://unpkg.com/esri-leaflet-geocoder@2.4.1/dist/esri-leaflet-geocoder.js"></script>
+
+
+
+
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        #map {
+            height: 100vh;
+        }
+
+        #search-box {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #locate-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            z-index: 1000;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        input {
+            margin: 5px 0;
+            padding: 5px;
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="install-btn" style="display: none;">Install App</button>
+    <!-- 
+    <div id="controls">
+        <input type="text" id="latitude" placeholder="عرض جغرافیایی" />
+        <input type="text" id="longitude" placeholder="طول جغرافیایی" />
+        <input type="number" id="radius" placeholder="شعاع (کیلومتر)" />
+        <button id="filter-button">فیلتر کردن</button>
+    </div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> -->
+
+
+
+
+    <div id="map"></div>
+    <!-- <input type="text" id="search-input" placeholder="Finding..." /> -->
+    <button id="locate-btn">My Location</button>
+
+    <!-- <div id="search-box">
+        <input type="text" id="search-input" placeholder="Location Search">
+    </div> -->
+    <script src="script.js"></script>
+    <h1> جهت مسیریابی از دکمه زیر استفاده نمایید. </h1>
+    <button onclick="location.href='routing.html'">شروع مسیریابی</button>
+
+
+</body>
+
+</html>

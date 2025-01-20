@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسیریابی</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+        }
+
+        #controls {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            z-index: 1000;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="controls">
+        <input type="text" id="destination-input" placeholder="مقصد را وارد کنید..." />
+        <button id="start-routing">شروع مسیریابی</button>
+    </div>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([35.6892, 51.3890], 12);
+        const apiKeyOpenCage = 'd346d44044c84edd8b3cb263851fcfa5'; // کلید API OpenCage
+        const apiKeyOpenRouteService = 'https://api.openrouteservice.org/v2/directions/driving-car'; // کلید API OpenRouteService
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        let startLat, startLng;
+        let destinationMarker;
+
+        // دریافت موقعیت فعلی کاربر
+        navigator.geolocation.getCurrentPosition(position => {
+            startLat = position.coords.latitude;
+            startLng = position.coords.longitude;
+            L.marker([startLat, startLng]).addTo(map).bindPopup('موقعیت فعلی شما').openPopup();
+            map.setView([startLat, startLng], 12);
+        }, error => {
+            console.error("خطا در دریافت موقعیت:", error);
+            alert("اجازه دسترسی به موقعیت جغرافیایی داده نشده است.");
+        });
+
+        // شروع مسیریابی
+        document.getElementById('start-routing').onclick = function () {
+            const destination = document.getElementById('destination-input').value;
+            if (!destination) {
+                alert("لطفاً مقصد را وارد کنید.");
+                return;
+            }
+
+            // **OpenCage**: تبدیل آدرس به مختصات
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(destination)}&key=${apiKeyOpenCage}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('خطا در پاسخ از OpenCage');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // چاپ داده‌های دریافتی برای دیباگ
+                    if (data.results.length === 0) {
+                        alert("مقصد پیدا نشد. لطفاً نام مکان را به درستی وارد کنید.");
+                        return;
+                    }
+                    const destLat = data.results[0].geometry.lat;
+                    const destLng = data.results[0].geometry.lng;
+
+                    // چاپ مختصات مقصد
+                    console.log(`مقصد: ${destLng}, ${destLat}`);
+
+                    // حذف مرکر قبلی (اگر وجود داشته باشد)
+                    if (destinationMarker) {
+                        map.removeLayer(destinationMarker);
+                    }
+
+                    // اضافه کردن مرکر جدید
+                    destinationMarker = L.marker([destLat, destLng]).addTo(map).bindPopup('مقصد').openPopup();
+
+                    // **OpenRouteService**: محاسبه مسیر
+                    fetch(`https://api.openrouteservice.org/v2/directions/driving-car?start=${startLng},${startLat}&end=${destLng},${destLat}`, {
+                        headers: {
+                            'Authorization': 'https://api.openrouteservice.org/v2/directions/driving-car' // کلید API OpenRouteService
+                        }
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('خطا در پاسخ از OpenRouteService');
+                            }
+                            return response.json();
+                        })
+                        .then(routeData => {
+                            console.log(routeData); // چاپ داده‌های مسیر برای دیباگ
+                            if (!routeData.routes || routeData.routes.length === 0) {
+                                alert("مسیر پیدا نشد.");
+                                return;
+                            }
+                            const route = routeData.routes[0].geometry.coordinates;
+                            const latlngs = route.map(coord => [coord[1], coord[0]]);
+                            L.polyline(latlngs, { color: 'blue', dashArray: '5, 5' }).addTo(map);
+                            map.fitBounds(latlngs);
+                        })
+                        .catch(error => console.error('خطا در محاسبه مسیر:', error));
+                })
+                .catch(error => console.error('خطا در جستجوی مقصد:', error));
+        };
+    </script>
+
+</body>
+
+</html>
