@@ -102,17 +102,25 @@
     <script src="script.js"></script>
     <h1> جهت مسیریابی از دکمه زیر استفاده نمایید. </h1>
     <button onclick="location.href='routing.html'">شروع مسیریابی</button>
-<script>
+
+
+
+
+    <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
       .then((registration) => {
         console.log('Service Worker registered with scope:', registration.scope);
       })
       .catch((error) => {
-        console.log('Service Worker registration failed:', error);
+        console.error('Service Worker registration failed:', error);
       });
   }
 </script>
+
+
+
+    
 
 </body>
 
