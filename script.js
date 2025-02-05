@@ -214,11 +214,11 @@ function displayData(data, userLat, userLon, radius) {
 
 // فیلتر کردن داده‌ها با کلیک روی دکمه
 document.getElementById('filter-button').addEventListener('click', () => {
-    const userLat = parseFloat(document.getElementById('latitude').value);
-    const userLon = parseFloat(document.getElementById('longitude').value);
-    const radius = parseFloat(document.getElementById('radius').value);
+    userLat = parseFloat(document.getElementById('latitude').value);
+    userLon = parseFloat(document.getElementById('longitude').value);
+    radius = parseFloat(document.getElementById('radius').value);
 
-    const filteredData = filterGeoJSON(geojsonData, userLat, userLon, radius);
+    filteredData = filterGeoJSON(geojsonData, userLat, userLon, radius);
     map.eachLayer(layer => {
         if (layer instanceof L.GeoJSON) {
             map.removeLayer(layer); // حذف لایه‌های قبلی
@@ -240,7 +240,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     deferredPrompt = e;
 
     // نمایش دکمه نصب
-    const installButton = document.getElementById('install-btn');
+    installButton = document.getElementById('install-btn');
     installButton.style.display = 'block';
 
     // زمانی که کاربر روی دکمه نصب کلیک می‌کند
@@ -271,7 +271,7 @@ L.control.fullscreen({
 }).addTo(map);
 
 // اضافه کردن Measure Control
-var measureControl = new L.Control.Measure({
+measureControl = new L.Control.Measure({
     position: 'topleft',
     primaryLengthUnit: 'meters',
     secondaryLengthUnit: 'kilometers',
@@ -281,12 +281,12 @@ var measureControl = new L.Control.Measure({
 
 document.getElementById('calculate-route').addEventListener('click', function () {
     // خواندن مقادیر ورودی
-    var startPoint = document.getElementById('start').value.trim();
-    var endPoint = document.getElementById('end').value.trim();
+    startPoint = document.getElementById('start').value.trim();
+    endPoint = document.getElementById('end').value.trim();
 
     // تبدیل مختصات به آرایه [latitude, longitude]
-    var startLatLng = parseLatLng(startPoint);
-    var endLatLng = parseLatLng(endPoint);
+    startLatLng = parseLatLng(startPoint);
+    endLatLng = parseLatLng(endPoint);
 
     // بررسی صحت ورودی‌ها
     if (!startLatLng || !endLatLng) {
@@ -300,7 +300,7 @@ document.getElementById('calculate-route').addEventListener('click', function ()
     }
 
     // ایجاد مسیر جدید
-    var route = L.Routing.control({
+    route = L.Routing.control({
         waypoints: [
             L.latLng(startLatLng[0], startLatLng[1]),
             L.latLng(endLatLng[0], endLatLng[1])
@@ -312,7 +312,7 @@ document.getElementById('calculate-route').addEventListener('click', function ()
 
 // تابع برای تجزیه مختصات ورودی به آرایه [latitude, longitude]
 function parseLatLng(input) {
-    var parts = input.split(',').map(function (part) {
+    parts = input.split(',').map(function (part) {
         return parseFloat(part.trim());
     });
     if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
