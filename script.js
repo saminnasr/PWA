@@ -273,3 +273,46 @@ measureControl = new L.Control.Measure({
 minimap = new L.Control.MiniMap(L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), {
     toggleDisplay: true
 }).addTo(map);
+
+
+document.getElementById('calculate-route').addEventListener('click', function () {
+    // خواندن مقادیر ورودی
+    var startPoint = document.getElementById('start').value.trim();
+    var endPoint = document.getElementById('end').value.trim();
+
+    // تبدیل مختصات به آرایه [latitude, longitude]
+    var startLatLng = parseLatLng(startPoint);
+    var endLatLng = parseLatLng(endPoint);
+
+    // بررسی صحت ورودی‌ها
+    if (!startLatLng || !endLatLng) {
+        alert("مختصات وارد شده نامعتبر است. لطفاً به فرمت 'latitude,longitude' وارد کنید.");
+        return;
+    }
+
+    // حذف مسیر قبلی (اگر وجود داشته باشد)
+    if (map.hasLayer(route)) {
+        map.removeLayer(route);
+    }
+
+    // ایجاد مسیر جدید
+    var route = L.Routing.control({
+        waypoints: [
+            L.latLng(startLatLng[0], startLatLng[1]),
+            L.latLng(endLatLng[0], endLatLng[1])
+        ],
+        routeWhileDragging: true,
+        fitSelectedRoutes: true // زوم به مسیر محاسبه شده
+    }).addTo(map);
+});
+
+// تابع برای تجزیه مختصات ورودی به آرایه [latitude, longitude]
+function parseLatLng(input) {
+    var parts = input.split(',').map(function (part) {
+        return parseFloat(part.trim());
+    });
+    if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+        return parts;
+    }
+    return null;
+}
