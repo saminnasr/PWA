@@ -262,18 +262,24 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 
-measureControl = new L.Control.Measure({
-    position: 'topleft',
-    primaryLengthUnit: 'meters',
-    secondaryLengthUnit: 'kilometers'
-}).addTo(map);
+   // اضافه کردن Fullscreen Control
+        L.control.fullscreen({
+            position: 'topleft',
+            title: 'نمایش تمام صفحه',
+            fullscreenOptions: {
+                cancelLabel: 'خروج از حالت تمام صفحه',
+                forcePseudoFullscreen: false
+            }
+        }).addTo(map);
 
-
-
-minimap = new L.Control.MiniMap(L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), {
-    toggleDisplay: true
-}).addTo(map);
-
+        // اضافه کردن Measure Control
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            activeColor: '#ff0000',
+            completedColor: '#00ff00'
+        }).addTo(map);
 
 document.getElementById('calculate-route').addEventListener('click', function () {
     // خواندن مقادیر ورودی
