@@ -96,8 +96,15 @@
         <input type="text" id="search-input" placeholder="Location Search">
     </div> -->
     <script src="script.js"></script>
-    <h1> جهت مسیریابی از دکمه زیر استفاده نمایید. </h1>
-    <button onclick="location.href='routing.html'">شروع مسیریابی</button>
+<form id="route-form">
+    <label for="start">نقطه شروع (緯度,经度):</label>
+    <input type="text" id="start" placeholder="مثال: 35.9408, 50.8254" required>
+
+    <label for="end">نقطه پایان (緯度,经度):</label>
+    <input type="text" id="end" placeholder="مثال: 35.9508, 50.8354" required>
+
+    <button type="button" id="calculate-route">محاسبه مسیر</button>
+</form>
 
 
 </body>
