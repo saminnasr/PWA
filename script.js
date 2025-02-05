@@ -271,13 +271,16 @@ L.control.fullscreen({
 }).addTo(map);
 
 // اضافه کردن Measure Control
-measureControl = new L.Control.Measure({
-    position: 'topleft',
-    primaryLengthUnit: 'meters',
-    secondaryLengthUnit: 'kilometers',
-    activeColor: '#ff0000',
-    completedColor: '#00ff00'
+measureControl = L.Control.Measure({
+    position: 'topleft', // موقعیت کنترل (topright, bottomleft, ...)
+    primaryLengthUnit: 'meters', // واحد اصلی طول
+    secondaryLengthUnit: 'kilometers', // واحد فرعی طول
+    primaryAreaUnit: 'sqmeters', // واحد اصلی مساحت
+    secondaryAreaUnit: 'hectares' // واحد فرعی مساحت
 }).addTo(map);
+
+
+
 
 document.getElementById('calculate-route').addEventListener('click', function () {
     // خواندن مقادیر ورودی
