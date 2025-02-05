@@ -105,16 +105,55 @@
     </div> -->
     <script src="script.js"></script>
 <form id="route-form">
-    <label for="start">نقطه شروع (緯度,经度):</label>
+    <label for="start">Start Point:</label>
     <input type="text" id="start" placeholder="مثال: 35.9408, 50.8254" required>
 
-    <label for="end">نقطه پایان (緯度,经度):</label>
+    <label for="end">End Point:</label>
     <input type="text" id="end" placeholder="مثال: 35.9508, 50.8354" required>
 
     <button type="button" id="calculate-route">محاسبه مسیر</button>
 </form>
 
+    <div id="map"></div>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Fullscreen Control JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-fullscreen/1.0.2/Leaflet.fullscreen.min.js"></script>
+
+    <!-- Measure Control JS -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-measure/dist/leaflet-measure.js"></script>
+
+    <script>
+        // ایجاد نقشه
+        var map = L.map('map').setView([35.6892, 51.3890], 13);
+
+        // اضافه کردن لایه Tile
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // اضافه کردن Fullscreen Control
+        L.control.fullscreen({
+            position: 'topleft',
+            title: 'نمایش تمام صفحه',
+            fullscreenOptions: {
+                cancelLabel: 'خروج از حالت تمام صفحه',
+                forcePseudoFullscreen: false
+            }
+        }).addTo(map);
+
+        // اضافه کردن Measure Control
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            activeColor: '#ff0000',
+            completedColor: '#00ff00'
+        }).addTo(map);
+    </script>
 </body>
 
 </html>
