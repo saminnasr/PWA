@@ -260,25 +260,17 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 
-// اضافه کردن Fullscreen Control
-L.control.fullscreen({
+measureControl = new L.Control.Measure({
     position: 'topleft',
-    title: 'نمایش تمام صفحه',
-    fullscreenOptions: {
-        cancelLabel: 'خروج از حالت تمام صفحه',
-        forcePseudoFullscreen: false
-    }
+    primaryLengthUnit: 'meters',
+    secondaryLengthUnit: 'kilometers'
 }).addTo(map);
 
-// اضافه کردن Measure Control
-measureControl = L.Control.Measure({
-    position: 'topleft', // موقعیت کنترل (topright, bottomleft, ...)
-    primaryLengthUnit: 'meters', // واحد اصلی طول
-    secondaryLengthUnit: 'kilometers', // واحد فرعی طول
-    primaryAreaUnit: 'sqmeters', // واحد اصلی مساحت
-    secondaryAreaUnit: 'hectares' // واحد فرعی مساحت
-}).addTo(map);
 
+
+minimap = new L.Control.MiniMap(L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), {
+    toggleDisplay: true
+}).addTo(map);
 
 
 
