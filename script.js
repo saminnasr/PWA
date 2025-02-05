@@ -316,3 +316,5 @@ function parseLatLng(input) {
     }
     return null;
 }
+
+L.control.fullscreen().addTo(map);
