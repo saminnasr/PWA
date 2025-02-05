@@ -1,5 +1,3 @@
-
-
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 const apiUrl = 'https://api.openrouteservice.org/v2/directions/driving-car?start=51.4133,35.7235&end=51.6650002,32.6707877';
 
@@ -262,24 +260,24 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 
-   // اضافه کردن Fullscreen Control
-        L.control.fullscreen({
-            position: 'topleft',
-            title: 'نمایش تمام صفحه',
-            fullscreenOptions: {
-                cancelLabel: 'خروج از حالت تمام صفحه',
-                forcePseudoFullscreen: false
-            }
-        }).addTo(map);
+// اضافه کردن Fullscreen Control
+L.control.fullscreen({
+    position: 'topleft',
+    title: 'نمایش تمام صفحه',
+    fullscreenOptions: {
+        cancelLabel: 'خروج از حالت تمام صفحه',
+        forcePseudoFullscreen: false
+    }
+}).addTo(map);
 
-        // اضافه کردن Measure Control
-        var measureControl = new L.Control.Measure({
-            position: 'topleft',
-            primaryLengthUnit: 'meters',
-            secondaryLengthUnit: 'kilometers',
-            activeColor: '#ff0000',
-            completedColor: '#00ff00'
-        }).addTo(map);
+// اضافه کردن Measure Control
+var measureControl = new L.Control.Measure({
+    position: 'topleft',
+    primaryLengthUnit: 'meters',
+    secondaryLengthUnit: 'kilometers',
+    activeColor: '#ff0000',
+    completedColor: '#00ff00'
+}).addTo(map);
 
 document.getElementById('calculate-route').addEventListener('click', function () {
     // خواندن مقادیر ورودی
