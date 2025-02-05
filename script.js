@@ -262,4 +262,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
     });
 });
 
+measureControl = new L.Control.Measure({
+    position: 'topleft',
+    primaryLengthUnit: 'meters',
+    secondaryLengthUnit: 'kilometers'
+}).addTo(map);
 
+
+
+minimap = new L.Control.MiniMap(L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'), {
+    toggleDisplay: true
+}).addTo(map);
