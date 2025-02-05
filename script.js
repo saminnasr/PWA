@@ -24,7 +24,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const geocoder = L.Control.geocoder().addTo(map);
-
+L.control.scale().addTo(map);
 // بارگذاری داده‌های GeoJSON
 fetch('./data.geojson')
     .then(response => {
